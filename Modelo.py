@@ -4,12 +4,18 @@ from pathlib import Path
 import joblib
 import requests
 import joblib
+import os
 
-# Especifica la ruta al archivo .pkl
-archivo_pkl = 'modelo_random_forest_TF.pkl'
+# Obtén la ruta relativa al archivo .pkl desde tu script de Python
+nombre_archivo = 'modelo_random_forest_TF.pkl'
+ruta_archivo = os.path.join(os.path.dirname(__file__), nombre_archivo)
 
-# Cargar el objeto desde el archivo .pkl
-modelo = joblib.load(archivo_pkl)
+# Verifica si el archivo .pkl existe en la ruta relativa
+if not os.path.exists(ruta_archivo):
+    raise FileNotFoundError(f'Archivo .pkl no encontrado en la ruta especificada: {ruta_archivo}')
+
+# Carga el modelo desde el archivo .pkl
+modelo = joblib.load(ruta_archivo)
 
 
 # Definir el título de la aplicación
