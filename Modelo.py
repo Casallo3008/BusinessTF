@@ -1,23 +1,15 @@
-# Montar Google Drive
-from google.colab import drive
-drive.mount('/content/drive')
-
-# Importar las bibliotecas necesarias
 import streamlit as st
-import joblib
 import pandas as pd
-
-# Ruta del modelo entrenado
-ruta_tablon = '/content/drive/MyDrive/Optimizacion/modelo_random_forest_TF.pkl'
+import joblib
 
 # Cargar el modelo entrenado
-modelo = joblib.load(ruta_tablon)
+modelo = joblib.load('modelo_random_forest_TF.pkl')
 
 # Definir el título de la aplicación
 st.title('Predicción de Cliente Permanece')
 
 # Definir las características seleccionadas según el ranking
-selected_features = ['Escala de Servicio', 'Edad']  # Asegúrate de que los nombres coincidan con tus datos
+selected_features = ['Escala de Servicio', 'Edad']
 
 # Agregar controles de entrada para las características seleccionadas
 escala_servicio = st.slider('Escala de Servicio', min_value=0, max_value=10, value=5)
