@@ -5,27 +5,12 @@ import joblib
 import requests
 import joblib
 
+# Ruta al archivo pickle que contiene el modelo entrenado
 output_path = 'modelo_random_forest_TF.pkl'
 
-try:
-    # Intentar cargar el modelo usando joblib
-    with open(output_path, 'rb') as f:
-        modelo = joblib.load(f)
-    print("Modelo cargado correctamente.")
-    # Aquí puedes continuar con el uso del modelo cargado
-
-except FileNotFoundError:
-    print(f"El archivo {output_path} no se encontró.")
-
-except ImportError:
-    print(f"No se pudo importar el módulo necesario para cargar el modelo desde {output_path}.")
-
-except KeyError as e:
-    print(f"Error de clave al cargar el modelo desde {output_path}: {e}")
-
-except Exception as e:
-    print(f"Error desconocido al cargar el modelo desde {output_path}: {str(e)}")
-
+# Intentar cargar el modelo
+with open(output_path, 'rb') as f:
+    modelo = joblib.load(f)
 
 
 
