@@ -3,7 +3,7 @@ import pandas as pd
 import joblib
 
 # Cargar el modelo entrenado
-modelo = joblib.load('modelo_random_forest_TF.pkl')
+modelo = joblib.load('https://github.com/Casallo3008/BusinessTF/blob/main/modelo_random_forest_TF.pkl')
 
 # Definir el título de la aplicación
 st.title('Predicción de Cliente Permanece')
