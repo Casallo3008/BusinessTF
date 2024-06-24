@@ -5,17 +5,19 @@ import joblib
 import requests
 import joblib
 import os
+import requests
+import pickle
 
-import joblib
-import os
+import pickle
 
-nombre_archivo = 'modelo_random_forest_TF.pkl'
-ruta_archivo = os.path.join(os.path.dirname(__file__), nombre_archivo)
+# Clona el repositorio
+!git clone https://github.com/BusinessTF.git
 
-try:
-    modelo = joblib.load(ruta_archivo)
-except Exception as e:
-    print(f"No se pudo cargar el archivo .pkl con joblib: {e}")
+# Lee el archivo .pkl
+with open('modelo_random_forest_TF.pkl', 'rb') as f:
+    data = pickle.load(f)
+
+print(data)
 
 
 
