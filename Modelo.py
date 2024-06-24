@@ -2,9 +2,6 @@
 from google.colab import drive
 drive.mount('/content/drive')
 
-# Instalar Streamlit (si no está instalado)
-!pip install streamlit
-
 # Importar las bibliotecas necesarias
 import streamlit as st
 import joblib
