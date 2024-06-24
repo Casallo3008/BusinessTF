@@ -1,9 +1,24 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import requests
+from pathlib import Path
 
-# Cargar el modelo entrenado
-modelo = joblib.load('modelo_random_forest_TF.pkl')
+# URL del archivo en GitHub
+url = 'https://raw.githubusercontent.com/BusinessTF/Modelo.py/main/modelo_random_forest_TF.pkl'
+
+# Directorio local donde guardar el archivo
+output_path = 'modelo_random_forest_TF.pkl'
+
+try:
+    # Descargar el archivo desde GitHub
+    response = requests.get(url)
+    with open(output_path, 'wb') as f:
+        f.write(response.content)
+
+    # Cargar el modelo desde el archivo descargado
+    modelo = joblib.load(output_path)
+    print("Modelo cargado correctamente.")
 
 # Definir el título de la aplicación
 st.title('Predicción de Cliente Permanece')
@@ -27,3 +42,15 @@ if st.button('Predecir'):
     proba = modelo.predict_proba(input_data)[:, 1]
     st.write(f'La predicción es: {"Permanece" if prediction[0] == 1 else "No Permanece"}')
     st.write(f'Probabilidad de permanecer: {proba[0]:.2f}')
+
+
+
+    # Opcional: eliminar el archivo después de usarlo
+    Path(output_path).unlink()
+
+except requests.exceptions.RequestException as e:
+    print(f"Error al descargar el archivo: {e}")
+except FileNotFoundError:
+    print(f"Error: Archivo no encontrado.")
+except Exception as e:
+    print(f"Error al cargar el modelo: {e}")
