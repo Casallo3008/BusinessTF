@@ -10,17 +10,12 @@ import pickle
 
 import pickle
 
-# Clona el repositorio
-!git clone https://github.com/BusinessTF.git
+############### PROBLEMA NO LEE EL ARCHIVO .PKL
 
-# Lee el archivo .pkl
-with open('modelo_random_forest_TF.pkl', 'rb') as f:
-    data = pickle.load(f)
-
-print(data)
+modelo = joblib.load('modelo_random_forest_TF.pkl')
 
 
-
+#############################################
 
 # Definir el título de la aplicación
 st.title('Predicción de Cliente Permanece')
