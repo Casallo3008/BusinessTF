@@ -6,16 +6,18 @@ import requests
 import joblib
 import os
 
-import pickle
+import joblib
+import os
 
-ruta_archivo = 'modelo_random_forest_TF.pkl'
+nombre_archivo = 'modelo_random_forest_TF.pkl'
+ruta_archivo = os.path.join(os.path.dirname(__file__), nombre_archivo)
 
-# Intenta cargar el archivo pickle con pickle
-with open(ruta_archivo, 'rb') as f:
-    try:
-        modelo = pickle.load(f)
-    except Exception as e:
-        print(f"No se pudo cargar el archivo pickle: {e}")
+try:
+    modelo = joblib.load(ruta_archivo)
+except Exception as e:
+    print(f"No se pudo cargar el archivo .pkl con joblib: {e}")
+
+
 
 
 # Definir el título de la aplicación
