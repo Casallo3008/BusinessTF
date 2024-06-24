@@ -6,16 +6,16 @@ import requests
 import joblib
 import os
 
-# Obtén la ruta relativa al archivo .pkl desde tu script de Python
-nombre_archivo = 'modelo_random_forest_TF.pkl'
-ruta_archivo = os.path.join(os.path.dirname(__file__), nombre_archivo)
+import pickle
 
-# Verifica si el archivo .pkl existe en la ruta relativa
-if not os.path.exists(ruta_archivo):
-    raise FileNotFoundError(f'Archivo .pkl no encontrado en la ruta especificada: {ruta_archivo}')
+ruta_archivo = 'ruta/a/tu/modelo_random_forest_TF.pkl'
 
-# Carga el modelo desde el archivo .pkl
-modelo = joblib.load(ruta_archivo)
+# Intenta cargar el archivo pickle con pickle
+with open(ruta_archivo, 'rb') as f:
+    try:
+        modelo = pickle.load(f)
+    except Exception as e:
+        print(f"No se pudo cargar el archivo pickle: {e}")
 
 
 # Definir el título de la aplicación
