@@ -7,14 +7,22 @@ from pathlib import Path
 # URL del archivo en GitHub
 url = 'https://raw.githubusercontent.com/Casallo3008/BusinessTF/main/modelo_random_forest_TF.pkl'
 
-# Directorio local donde guardar el archivo
+
+# Ruta local donde se guardará el archivo descargado
 output_path = 'modelo_random_forest_TF.pkl'
 
-
-# Descargar el archivo desde GitHub
+# Descargar el archivo desde la URL
 response = requests.get(url)
-with open(output_path, 'wb') as f:
-    f.write(response.content)
+if response.status_code == 200:
+    # Guardar el contenido descargado en un archivo local
+    with open(output_path, 'wb') as f:
+        f.write(response.content)
+else:
+    print(f"No se pudo descargar el archivo desde {url}. Status code: {response.status_code}")
+    exit(1)
+
+# Intentar cargar el modelo usando joblib
+modelo = joblib.load(output_path)
 
 # Cargar el modelo desde el archivo descargado
 modelo = joblib.load(output_path)
