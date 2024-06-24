@@ -41,7 +41,3 @@ if st.button('Predecir'):
     st.write(f'La predicción es: {"Permanece" if prediction[0] == 1 else "No Permanece"}')
     st.write(f'Probabilidad de permanecer: {proba[0]:.2f}')
 
-
-
-# Opcional: eliminar el archivo después de usarlo
-Path(output_path).unlink()
