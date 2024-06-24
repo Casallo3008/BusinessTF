@@ -3,32 +3,28 @@ import pandas as pd
 from pathlib import Path
 import joblib
 import requests
+import joblib
 
-# URL raw del archivo en GitHub
-url = 'https://raw.githubusercontent.com/Casallo3008/BusinessTF/main/modelo_random_forest_TF.pkl'
-
-# Ruta local donde se guardará el archivo descargado
 output_path = 'modelo_random_forest_TF.pkl'
 
-# Descargar el archivo desde la URL
-response = requests.get(url)
-if response.status_code == 200:
-    # Guardar el contenido descargado en un archivo local
-    with open(output_path, 'wb') as f:
-        f.write(response.content)
-else:
-    print(f"No se pudo descargar el archivo desde {url}. Status code: {response.status_code}")
-    exit(1)
-
-# Intentar cargar el modelo usando joblib
 try:
+    # Intentar cargar el modelo usando joblib
     with open(output_path, 'rb') as f:
         modelo = joblib.load(f)
     print("Modelo cargado correctamente.")
     # Aquí puedes continuar con el uso del modelo cargado
+
+except FileNotFoundError:
+    print(f"El archivo {output_path} no se encontró.")
+
+except ImportError:
+    print(f"No se pudo importar el módulo necesario para cargar el modelo desde {output_path}.")
+
+except KeyError as e:
+    print(f"Error de clave al cargar el modelo desde {output_path}: {e}")
+
 except Exception as e:
-    print(f"Error al cargar el modelo desde {output_path}: {str(e)}")
-    exit(1)
+    print(f"Error desconocido al cargar el modelo desde {output_path}: {str(e)}")
 
 
 
