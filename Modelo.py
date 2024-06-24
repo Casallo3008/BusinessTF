@@ -5,19 +5,11 @@ import joblib
 import requests
 import joblib
 
-# Enlace al archivo en GitHub
-url = "https://github.com/Casallo3008/BusinessTF/raw/main/modelo_random_forest_TF.pkl"
+# Especifica la ruta al archivo .pkl
+archivo_pkl = 'modelo_random_forest_TF.pkl'
 
-# Intentar cargar el modelo desde la URL
-response = requests.get(url)
-if response.status_code == 200:
-    with open('modelo_random_forest_TF.pkl', 'wb') as f:
-        f.write(response.content)
-    modelo = joblib.load('modelo_random_forest_TF.pkl')
-    # Utiliza el modelo cargado como necesites
-else:
-    print("No se pudo obtener el archivo")
-
+# Cargar el objeto desde el archivo .pkl
+modelo = joblib.load(archivo_pkl)
 
 
 # Definir el título de la aplicación
