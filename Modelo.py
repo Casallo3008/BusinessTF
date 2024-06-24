@@ -5,7 +5,7 @@ import requests
 from pathlib import Path
 
 # URL del archivo en GitHub
-url = 'https://raw.githubusercontent.com/BusinessTF/Modelo.py/main/modelo_random_forest_TF.pkl'
+url = 'https://github.com/Casallo3008/BusinessTF/blob/main/modelo_random_forest_TF.pkl'
 
 # Directorio local donde guardar el archivo
 output_path = 'modelo_random_forest_TF.pkl'
