@@ -8,7 +8,7 @@ import os
 
 import pickle
 
-ruta_archivo = 'ruta/a/tu/modelo_random_forest_TF.pkl'
+ruta_archivo = 'modelo_random_forest_TF.pkl'
 
 # Intenta cargar el archivo pickle con pickle
 with open(ruta_archivo, 'rb') as f:
