@@ -1,12 +1,11 @@
 import streamlit as st
 import pandas as pd
+from pathlib import Path
 import joblib
 import requests
-from pathlib import Path
 
-# URL del archivo en GitHub
+# URL raw del archivo en GitHub
 url = 'https://raw.githubusercontent.com/Casallo3008/BusinessTF/main/modelo_random_forest_TF.pkl'
-
 
 # Ruta local donde se guardará el archivo descargado
 output_path = 'modelo_random_forest_TF.pkl'
@@ -22,11 +21,18 @@ else:
     exit(1)
 
 # Intentar cargar el modelo usando joblib
-modelo = joblib.load(output_path)
+try:
+    with open(output_path, 'rb') as f:
+        modelo = joblib.load(f)
+    print("Modelo cargado correctamente.")
+    # Aquí puedes continuar con el uso del modelo cargado
+except Exception as e:
+    print(f"Error al cargar el modelo desde {output_path}: {str(e)}")
+    exit(1)
 
-# Cargar el modelo desde el archivo descargado
-modelo = joblib.load(output_path)
-print("Modelo cargado correctamente.")
+
+
+
 
 # Definir el título de la aplicación
 st.title('Predicción de Cliente Permanece')
