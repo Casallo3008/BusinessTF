@@ -5,12 +5,15 @@ import joblib
 import requests
 import joblib
 
-# Ruta al archivo pickle que contiene el modelo entrenado
-output_path = 'modelo_random_forest_TF.pkl'
+# Enlace al archivo en GitHub
+url = "https://github.com/Casallo3008/BusinessTF/raw/main/modelo_random_forest_TF.pkl"
 
-# Intentar cargar el modelo
-with open(output_path, 'rb') as f:
-    modelo = joblib.load(f)
+# Intentar cargar el modelo desde la URL
+response = requests.get(url)
+
+with open('modelo_random_forest_TF.pkl', 'wb') as f:
+    f.write(response.content)
+modelo = joblib.load('modelo_random_forest_TF.pkl')
 
 
 
