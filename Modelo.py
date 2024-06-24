@@ -10,11 +10,13 @@ url = "https://github.com/Casallo3008/BusinessTF/raw/main/modelo_random_forest_T
 
 # Intentar cargar el modelo desde la URL
 response = requests.get(url)
-
-with open('modelo_random_forest_TF.pkl', 'wb') as f:
-    f.write(response.content)
-modelo = joblib.load('modelo_random_forest_TF.pkl')
-
+if response.status_code == 200:
+    with open('modelo_random_forest_TF.pkl', 'wb') as f:
+        f.write(response.content)
+    modelo = joblib.load('modelo_random_forest_TF.pkl')
+    # Utiliza el modelo cargado como necesites
+else:
+    print("No se pudo obtener el archivo")
 
 
 
