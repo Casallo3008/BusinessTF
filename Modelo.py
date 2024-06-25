@@ -8,14 +8,29 @@ import os
 import requests
 import pickle
 
-import pickle
+import requests
+from io import BytesIO
 
-############### PROBLEMA NO LEE EL ARCHIVO .PKL
+url = 'modelo_random_forest_TF.pkl'
 
-modelo = joblib.load('modelo_random_forest_TF.pkl')
+try:
+    # Descargar el archivo del modelo desde GitHub
+    response = requests.get(url)
+    response.raise_for_status()  # Esto levantará una excepción si hay un error en la solicitud
 
+    # Cargar el modelo desde los bytes descargados
+    modelo = joblib.load(BytesIO(response.content))
+    print("Modelo cargado exitosamente.")
 
-#############################################
+except requests.exceptions.RequestException as e:
+    print(f"Error al descargar el modelo: {e}")
+
+except joblib.externals.loky.process_executor._RemoteTraceback as e:
+    print(f"Error al cargar el modelo con joblib: {e}")
+
+except Exception as e:
+    print(f"Ha ocurrido un error inesperado: {e}")
+
 
 # Definir el título de la aplicación
 st.title('Predicción de Cliente Permanece')
